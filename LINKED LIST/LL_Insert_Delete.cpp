@@ -145,18 +145,30 @@ void InsertBeforePos(Node *&h,int el, int key){
 }
 
 void deleteFromFront(Node *&h){
+    if(h == NULL){ 
+        cout<<"List is empty !! "; return ;
+    }
     Node *temp = h;
     h = h-> next ;
     delete temp ;
 }
 
 void deleteAtEnd(Node *&h ){
+    if(h == NULL){
+        cout<<"List is empty !! "; return ;
+    }
+    else if(h->next == NULL){ // when 1 node only
+        cout<<"Deleted elm : "<<h->data <<endl ;
+        delete h;
+        h = NULL ;
+    }
     Node *curr = h, *prev = h ;
     while(curr->next != NULL){
         prev = curr ;
         curr = curr->next ;
     }
     prev -> next = NULL;
+    cout<<"Deleted el : "<<curr->data <<endl ;
     delete curr ;
 }
 
