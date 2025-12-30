@@ -103,33 +103,33 @@ void InsertAtEnd(Node *&h, Node *&t, int el){
 
 }
 
-void InsertAfterPos(Node *&h, int el, int posEl){
+void InsertAfterPos(Node *&h, int el, int key){
     Node * n = new Node(el) ;
 
     Node * curr = h;
-    while((curr != NULL) &&(curr->data != posEl) ){//we reach that posElm
+    while((curr != NULL) &&(curr->data != key) ){//we reach that keym
         curr = curr-> next ; // traverse to the position
     }
-    if(curr -> data == posEl){ // postElm found
+    if(curr -> data == key){ // pokey found
         n-> next = curr->next;
         curr ->next = n ;
     }
-    else{   // posElm not found
-        cout<<posEl<<" Element not found !! ";
+    else{   // pkey not found
+        cout<<"key Element not found !! " <<endl ;
         return ;
     }
 }
 
-void InsertBeforePos(Node *&h,int el, int posELm){
+void InsertBeforePos(Node *&h,int el, int key){
     Node *n = new Node(el) ;
     // traverse to that position
     Node *curr = h , *prev = NULL ;
-    while((curr != NULL) && (curr->data != posELm)){
+    while((curr != NULL) && (curr->data != key)){
         prev =  curr ;
         curr = curr-> next ;
     }
-    if(curr->data == posELm){
-        if(curr == h){ //posElm is at first position
+    if(curr->data == key){
+        if(curr == h){ //key is at first position
             n->next = curr ;
             h = n ;
         }
@@ -139,7 +139,7 @@ void InsertBeforePos(Node *&h,int el, int posELm){
         }
     } 
     else{
-        cout<< "Element not found !! "<<endl ;
+        cout<< "Key Element not found !! "<<endl ;
         return ;
     }
 }
@@ -160,24 +160,58 @@ void deleteAtEnd(Node *&h ){
     delete curr ;
 }
 
-void deleteAfterPos(Node *&h, int posElm){
+void deleteAfterPos(Node *&h, int key){
     Node * curr = h ;
+    if(h == NULL){
+        cout<<"List is empty !! "<<endl;  return ;
+    }
     // traverse to that posElm
-    while((curr  != NULL) && (curr->data != posElm) ){
+    while((curr  != NULL) && (curr->data != key) ){
         curr = curr->next ;
     }
     if(curr == NULL ){ // key not found
-        cout<<"Key Element not found !!";
-        return ;
+        cout<<"Key Element not found !!" <<endl ; return ;
     }
     if(curr -> next == NULL){
-        cout<<"No elemnt after the key !!" ;
+        cout<<"No elemnt after the key !!" <<endl; return ;
     }
     Node *temp = curr -> next;
     curr->next = temp ->next ;
-    cout<<"Deleted item is : "<<temp->data <<endl ;;
+    cout<<"Deleted item (after key "<<key<<") : "<<temp->data << "   "<<endl ;
     delete temp ;
     
+}
+
+void deleteBeforePos(Node *&h, int key){
+    if(h == NULL){
+        cout<<"List is empty !! "<<endl;
+        return ;
+    }
+    Node *curr = h ,*prev = NULL , *secnPrev= NULL;
+    // traverse to that key elm
+    while(curr != NULL && curr->data != key){
+        secnPrev = prev ;
+        prev = curr;
+        curr = curr->next ;
+    }
+    if(curr == NULL){
+        cout<<"Key not found !!" <<endl ; return ;
+    }
+    if(prev == NULL){// or curr points to Head
+        cout<<"No elm before is present !! "<<endl ; return ;
+    }
+    if(secnPrev == NULL){ // when prev points to Head
+        h = curr;
+        cout<<"Deleted item (before key " <<key<<" ) :"<<prev->data<<endl ;
+        delete prev ;
+        return ;
+    }
+
+    Node *temp = prev ;
+    secnPrev ->next = curr ;
+    cout<<"Deleted item (before key "<<key<<") : "<<temp->data <<endl ;
+    delete prev ;
+
 }
 
 void print(Node * h){
@@ -213,6 +247,10 @@ int main(){
     cout<<endl<<endl  ;
     deleteAfterPos(head, 25);
     print(head) ;
+    cout<<endl <<endl ;
+
+    deleteBeforePos(head, 3);
+    print(head);
     cout<<endl <<endl ;
 
     return 0;
