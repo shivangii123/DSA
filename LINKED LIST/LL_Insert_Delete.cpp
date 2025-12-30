@@ -207,9 +207,8 @@ void deleteBeforePos(Node *&h, int key){
         return ;
     }
 
-    Node *temp = prev ;
     secnPrev ->next = curr ;
-    cout<<"Deleted item (before key "<<key<<") : "<<temp->data <<endl ;
+    cout<<"Deleted item (before key "<<key<<") : "<< prev->data <<endl ;
     delete prev ;
 
 }
