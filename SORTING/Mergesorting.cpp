@@ -26,7 +26,8 @@ void merge(vector<int>&arr,vector<int>&b, vector<int>&c, int s,int e){
 }
 
 void mergeSort(vector<int>&arr, int s,int e){
-    if(s>= e) return ;
+    if(s>= e) return ; // single element left
+    
     vector<int>b(100), c(100);
     int m = s + (e-s)/2 ;
     //1. divide into 2
