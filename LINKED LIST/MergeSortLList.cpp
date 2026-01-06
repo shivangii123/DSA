@@ -1,103 +1,102 @@
+// list = 8 -1 -4 -5 9 2
 #include<iostream>
 using namespace std;
 
 class Node{
-    public:
-    int data;
-    Node* next ;
+    public :
+    int data ;
+    Node *next ;
 
     Node(int val){
-        data = val;
+        data = val ;
         next = NULL ;
     }
 };
 
-Node* merge(Node* list1, Node* list2 ){
-    Node *p = new Node(-1) ;  // dummy node
-    Node *temp = p, *nh= p;
-    while(list1 != NULL && list2 != NULL){
-        if(list1 ->data <= list2->data){
-            p->next = list1 ;
-            list1 = list1 ->next ;
+Node* merge(Node *l1, Node *l2 ){
+    if(l1 == NULL){ return l2 ;}
+    if(l2 == NULL){ return l1 ;}    
+
+    Node *dummy = new Node(-1) ;
+    Node* p = dummy ;
+
+    while(l1 != NULL && l2!= NULL){
+        if(l1->data <= l2->data){
+            p->next = l1 ;
+            l1= l1->next ;
             p= p->next ;
         }
-        else{ 
-            p->next = list2 ;
-            list2 =list2->next ;
-            p = p->next ; 
+        else{
+            p->next =l2;
+            l2= l2->next ;
+            p= p->next ;
         }
     }
-    while(list1 != NULL){
-        p->next = list1;
-        list1= list1->next ;
+    while(l1 != NULL){
+        p->next = l1 ;
+        l1 = l1->next ;
         p= p->next ;
     }
-    while(list2 != NULL){
-        p ->next = list2 ;
-        list2= list2->next ;
-        p= p->next ;
+    while(l2 != NULL){
+        p->next = l2 ;
+        l2 =l2->next ;
+        p = p->next ;
     }
-
-    nh= nh->next ;
-    delete temp ;
-    return nh ;
+    Node * nhead = dummy ->next ;
+    delete dummy ;
+    return nhead ;
 }
 
-Node* mergeSort(Node* head){
-
-    if( head == NULL || head->next == NULL ){
-        return head;
+Node* mergeSortLL(Node* head){
+    // Base Case:- Single elm or List Empty
+    if(head == NULL || head->next == NULL ){ 
+        return head ;
     }
-    
-    Node* slow = head, *fast = head->next ;
+
+    Node *slow = head , *fast = head->next ;
     while(fast != NULL && fast->next != NULL){
-        fast =fast->next ->next ;
+        fast = fast ->next->next ;
         slow = slow->next ;
     }
 
-    Node *mid = slow ;
+    Node *mid = slow ; //1) Divide 
     Node *s2 = mid->next ;
-    mid->next = NULL ;
+    mid->next = NULL ; //to divide LList in 2 parts
 
-    Node* l1= mergeSort(head) ;
-    Node* l2 = mergeSort(s2) ;
+    Node *l1= mergeSortLL(head) ; // 2) Recursive MergeSort
+    Node *l2= mergeSortLL(s2);
 
-    return  merge(l1,l2 ) ;
-    
+    return merge(l1, l2) ; // 3) Merge
+
 }
-
-void printLL(Node* head){
-    Node *curr= head;
+void printLL(Node *head){
+    Node *curr = head ;
     while(curr != NULL){
-        cout<<curr->data <<"--> ";
-        curr= curr-> next ;
+        cout<< curr->data <<"--> ";
+        curr = curr->next ; 
     }
-    cout<<"NULL ";
+    cout<<"NULL " ;
 }
 
 int main(){
+    int n, el ; cout<<"No. of elements :  "; cin>> n;
 
-    int n , el ; cout<<"No. of elem : "; cin>>n ;
-    Node* head = new Node(-1) ;
-    Node* curr = head ;
+    Node *head = new Node(-1) ; // dummy node
+    Node *curr =  head , *temp = head ;
 
-    cout<<"Enter list elements : ";
-    for(int i=0;i<n;i++){
-        cin >> el;
+    for(int i=0;i<n ;i++){
+        cin>>el ;
         curr->next = new Node(el) ;
-        curr= curr->next ;
+        curr = curr->next ;
     }
+    head = head ->next ;
+    delete temp ; // delete dummy node
 
-    Node *temp = head ;
-    head= head->next ;
-    delete temp ;
+    cout<<"Initially Linked List is : " ;
+    printLL(head) ;
 
-    cout<<"Initially Linked list is : ";
-    printLL(head);
-    Node *newHead= mergeSort(head) ;
+    Node *nh = mergeSortLL(head);
+    cout<<"\nAfter MergeSort : " ;
+    printLL(nh);
 
-    cout<<"\nMerge linked list is : ";
-    printLL(newHead) ;
-
-    return 0 ;
 }
