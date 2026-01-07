@@ -81,16 +81,16 @@ void printLL(Node *head){
 int main(){
     int n, el ; cout<<"No. of elements :  "; cin>> n;
 
-    Node *head = new Node(-1) ; // dummy node
-    Node *curr =  head , *temp = head ;
+    Node *dummy = new Node(-1) ; // dummy node
+    Node *curr =  dummy ;
 
     for(int i=0;i<n ;i++){
         cin>>el ;
         curr->next = new Node(el) ;
         curr = curr->next ;
     }
-    head = head ->next ;
-    delete temp ; // delete dummy node
+    Node *head = dummy->next ;
+    delete dummy ; // delete dummy node
 
     cout<<"Initially Linked List is : " ;
     printLL(head) ;

@@ -24,8 +24,8 @@ ListNode* middleOfList(ListNode* head){
 
 int main(){
     
-    ListNode *head = new ListNode(-1); // Dummy Node
-    ListNode *curr = head ;
+    ListNode *dummy = new ListNode(-1); // Dummy Node
+    ListNode *curr = dummy ;
     int n, el ; cout<<"Enter no of nodes : "; cin>>n ;
     cout<<"Enter Node elements : ";
     for(int i=0; i<n ; i++){
@@ -33,9 +33,8 @@ int main(){
         curr ->next = new ListNode(el) ;
         curr= curr->next ;
     }
-    ListNode *temp = head ;
-    head = head->next ;
-    delete temp ; // prevent mry leak 
+    ListNode *head = dummy ->next ;
+    delete dummy ; // prevent mry leak 
 
     ListNode *mid = middleOfList(head);
     cout<<"Middle element is : "<< mid-> data<<endl ;
