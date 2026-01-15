@@ -56,13 +56,13 @@ Node* bubbleSortLL(Node *head){
     return head ;
 }
 
-void printLL(Node *head ){
+void printLL(Node *head){
     Node *curr = head ;
     while(curr != NULL){
-        cout<<curr->data <<"--> ";
+        cout<< curr->data <<"-->" ;
         curr = curr->next ;
     }
-    cout<<"NULL " ;
+    cout<<"NULL" ;
 }
 
 int main(){
