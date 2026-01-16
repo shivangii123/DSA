@@ -30,14 +30,14 @@ Node* bubbleSortLL(Node *head){
     
     for(int i=0;i<len-1 ; i++){
         Node *curr = head , *pv = NULL ;
-        while(curr->next != NULL){// stop comparison at 1 node earlier
+        while(curr!=NULL && curr->next != NULL){// stop comparison at 1 node earlier
             Node *n = curr->next ; 
             if(curr->data > n->data ){ // swapping takes place
                 if(pv == NULL){
-                curr->next = n->next ;
-                n->next = curr;
-                head = n; // head changes
-                pv = n; // prev is always 1 step behind curr
+                    curr->next = n->next ;
+                    n->next = curr;
+                    head = n; // head changes
+                    pv = n; // prev is always 1 step behind curr
                 }
                 else{
                     curr->next = n->next ;
@@ -66,7 +66,7 @@ void printLL(Node *head){
 }
 
 int main(){
-    int n , el; cout<<"Enter n : "; cin>>n ;
+    int n , el; cout<<"Enter no.of nodes : "; cin>>n ;
 
     Node *dummy = new Node(-1);
     Node *curr = dummy ;
