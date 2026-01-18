@@ -39,8 +39,8 @@ int main(){
     delete dummy ;
 
 
-    int pos ;cout<<"Enter pos(-1 for no cycle): ";cin>>pos ;
-    Node *tail =head ;
+    int pos ;cout<<"Enter pos(-1 for no cycle): "; cin>>pos ;
+    Node *tail = head ;
     Node *cycleNode = NULL ;
     int indx =0;
 
@@ -53,10 +53,10 @@ int main(){
         temp= temp->next;
         indx++;
     }
-    if(pos != -1 &&cycleNode !=NULL){
+
+    if(pos != -1 && cycleNode !=NULL){
         tail->next = cycleNode ; //create cycle
     }
-
     
     if(isCycle(head)){
         cout<< "\nCycle is present " ;
