@@ -15,8 +15,8 @@ class Node{
 void printLL(Node *head){
     Node *curr = head;
     while(curr !=NULL){
-        cout<<curr->data <<"--> ";
-        curr= curr->next;
+        cout<<curr->data << "--> ";
+        curr = curr->next;
     }
     cout<<"NULL ";
 }
@@ -24,7 +24,7 @@ void printLL(Node *head){
 Node* revLList2(Node *head , int l, int r){
     if(head == NULL || l== r){return head ;}
 
-    Node *dummy = new Node(-1) ;
+    Node *dummy = new Node(-1) ;//Insert dummy at start of LList(if l=1,head changes)
     dummy ->next = head ; // dummy's next points to head of LList
     Node *temp = dummy ;
     for(int i=1; i<l; i++){// reach to posn 'l'
