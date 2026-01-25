@@ -30,9 +30,10 @@ string solve(string s){
 }
 
 int main(){
+    cout<<"enter t : ";
     int t;cin>>t ;
     while(t--){
-        string s; cin>> s;
+        string s; cout<<"enter s : " ; cin>> s;
         cout<<"Ans :"<<solve(s)<<endl ;
     }
     return 0;
