@@ -29,15 +29,15 @@ using namespace std;
 void subSeq(string s , string newstr, int i, unordered_set<string> &set){
 
     if(i== s.size()){
-        // if(set.count(newstr)){ // already present-DUPLICATE
-        //     return;
-        // }
-        // else{
+        if(set.count(newstr)){ // already present-DUPLICATE
+            return;
+        }
+        else{
 
-        //     cout<< newstr <<endl ;
-        //     set.insert(newstr);
-        //     return ;
-        // }
+            cout<< newstr <<endl ;
+            set.insert(newstr);
+            return ;
+        }
     }
 
     subSeq(s , newstr + s[i] , i+1, set);
