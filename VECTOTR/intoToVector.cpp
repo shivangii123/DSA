@@ -5,8 +5,7 @@ using namespace std;
 int main(){
     int n; cout<<"Enter size : ";
     cin>>n;
-    vector<int> v ={1,2 ,3,4};
-    // vector<int> v(n,1);
+    vector<int> v(n);
 
     for(int i=0;i<v.size();i++){
         cin>>v[i];
@@ -14,6 +13,7 @@ int main(){
 
     v.push_back(8);
     v.push_back(9);
+    v.push_back(3);
     v.pop_back();
 
     v.resize(8);
